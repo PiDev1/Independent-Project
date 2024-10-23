@@ -358,6 +358,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Users/YoG2026/Documents/Unity/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Users/YoG2026/Documents/Unity/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Camera.cs"
+"Assets/Despawn.cs"
 "Assets/Movement.cs"
 "Assets/Rain Script.cs"
 -langversion:9.0
