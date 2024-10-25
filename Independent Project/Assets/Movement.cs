@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    //variables to define values such as speed, input, components, and more.
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;
@@ -45,6 +46,7 @@ public class Movement : MonoBehaviour
     public Transform orientation;
     public MovementState state;
 
+    //defines the different states needed for varying player movement
     public enum MovementState
     {
         walking,
@@ -53,6 +55,7 @@ public class Movement : MonoBehaviour
         air,
     }
 
+    //defines some of the variables to use for later
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -60,6 +63,8 @@ public class Movement : MonoBehaviour
         readyToJump = true;
         startYScale = transform.localScale.y;
     }
+
+    //initiates the following coroutines/functions and defines if player is grounded or not
     void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -76,12 +81,14 @@ public class Movement : MonoBehaviour
             rb.drag = 0;
         }
     }
+
+    //starts the following coroutine in a fixed time that isn't affected by the framerate
     private void FixedUpdate()
     {
         MovePlayer();
     }
 
-    //General
+    //Functions that determine the input of the user in order to move the player
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -105,6 +112,8 @@ public class Movement : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
         }
     }
+
+    //Changes the state of the player depending on the input or variables required.
     private void StateHandler()
     {
 
@@ -129,7 +138,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    //Slope Movement
+    //allows player to move on an elevated slope without any bugs
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
@@ -144,7 +153,7 @@ public class Movement : MonoBehaviour
         return false;
     }
 
-    //Player Movement
+    //moves the player by adding force onto the game object
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -169,6 +178,8 @@ public class Movement : MonoBehaviour
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
+
+    //limits the speed that the player can move by setting a predetermined velocity
     private void SpeedControl()
     {
         if (OnSlope() && !exitingSlope)
@@ -188,7 +199,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    //Jump Movement
+    //gives force to the player object to go upwards, acts as jumping
     private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);

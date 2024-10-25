@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class RainScript : MonoBehaviour
 {
+    //defines the variables like the time it takes to spawn the rain object
     public GameObject gameManager;
     public GameObject rainPrefab;
 
     float spawnTimer = 2f;
     float rateIncrease = 5f;
    
+    //Starts the functions to spawn the rain and increase the rate of spawn
     void Start()
     {
         StartCoroutine(SpawnRain());
         StartCoroutine(SpawnIncrease());
     }
+
+    //secret fun feature that detects whenever the user presses a specific button, setting the timer to zero
     void Update()
     {
         if (Input.GetMouseButtonDown(2))
@@ -23,6 +27,7 @@ public class RainScript : MonoBehaviour
         }
     }
 
+    //a function allowing the use of time and waiting that spawns the rain object after the timer amount
     IEnumerator SpawnRain()
     {
         Vector3 spawnposition = new((Random.Range(-25,25)), 10, (Random.Range(-25,25)));
@@ -31,6 +36,8 @@ public class RainScript : MonoBehaviour
         yield return new WaitForSeconds(spawnTimer);
         StartCoroutine(SpawnRain());
     }
+
+    //a function allowing the use of time and waiting that increases the frequency of how much the rain spawns
     IEnumerator SpawnIncrease()
     {
         yield return new WaitForSeconds(rateIncrease);
