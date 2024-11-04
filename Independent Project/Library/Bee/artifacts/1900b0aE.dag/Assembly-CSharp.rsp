@@ -362,6 +362,7 @@
 "Assets/Despawn.cs"
 "Assets/Movement.cs"
 "Assets/Rain Script.cs"
+"Assets/Score.cs"
 -langversion:9.0
 /deterministic
 /optimize+
