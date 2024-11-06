@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Rain
+  - Score
+  - Highscore
   layers:
   - Default
   - TransparentFX

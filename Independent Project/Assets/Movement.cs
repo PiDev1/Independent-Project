@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     private float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
+    public float speedMultiplier = 0;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -62,6 +63,8 @@ public class Movement : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
         startYScale = transform.localScale.y;
+
+        StartCoroutine(SpeedIncrease());
     }
 
     //initiates the following coroutines/functions and defines if player is grounded or not
@@ -120,17 +123,17 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
+            moveSpeed = (crouchSpeed + speedMultiplier);
         }
         if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            moveSpeed = (sprintSpeed + speedMultiplier);
         }
         else if (grounded)
         {
             state = MovementState.walking;
-            moveSpeed = walkSpeed;
+            moveSpeed = (walkSpeed + speedMultiplier);
         }
         else
         {
@@ -210,5 +213,14 @@ public class Movement : MonoBehaviour
     {
         readyToJump = true;
         exitingSlope = false;
+    }
+
+    IEnumerator SpeedIncrease()
+    {
+        yield return new WaitForSeconds(4);
+
+        speedMultiplier += 0.25f;
+        moveSpeed += speedMultiplier;
+        StartCoroutine(SpeedIncrease());
     }
 }

@@ -360,8 +360,10 @@
 -analyzer:"C:/Users/YoG2026/Documents/Unity/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Camera.cs"
 "Assets/Despawn.cs"
+"Assets/Destroy.cs"
 "Assets/Movement.cs"
 "Assets/Rain Script.cs"
+"Assets/Respawn.cs"
 "Assets/Score.cs"
 -langversion:9.0
 /deterministic

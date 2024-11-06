@@ -11,8 +11,8 @@ public class RainScript : MonoBehaviour
 
     Score score;
 
-    float spawnTimer = 2f;
-    float rateIncrease = 5f;
+    public float spawnTimer = 2f;
+    public float rateIncrease = 5f;
    
     //Starts the functions to spawn the rain and increase the rate of spawn
     void Start()
@@ -32,7 +32,7 @@ public class RainScript : MonoBehaviour
     }
 
     //a function allowing the use of time and waiting that spawns the rain object after the timer amount
-    IEnumerator SpawnRain()
+    public IEnumerator SpawnRain()
     {
         player = GameObject.FindWithTag("Player");
         Vector3 spawnposition = new((Random.Range(-25,25)), 10, (Random.Range(-25,25)));
@@ -46,7 +46,7 @@ public class RainScript : MonoBehaviour
     }
 
     //a function allowing the use of time and waiting that increases the frequency of how much the rain spawns
-    IEnumerator SpawnIncrease()
+     public IEnumerator SpawnIncrease()
     {
         yield return new WaitForSeconds(rateIncrease);
         if (spawnTimer >= 0.5f)

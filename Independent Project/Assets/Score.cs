@@ -4,26 +4,34 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Score : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highscore;
+    public TextMeshProUGUI highscoreText;
     public int scoreValue = 0;
+    public int highscoreValue;
 
     void Start()
     {
-        highscore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+    }
+
+    private void Update()
+    {
+       scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
+       highscoreText = GameObject.FindGameObjectWithTag("Highscore").GetComponent<TextMeshProUGUI>();
     }
     public void AddScore()
     {
        scoreValue += 1;
        scoreText.text = scoreValue.ToString();
+       highscoreText.text = highscoreValue.ToString();
 
-       if (scoreValue > PlayerPrefs.GetInt("HighScore", 0))
+        if (scoreValue > highscoreValue)
         {
-            PlayerPrefs.GetInt("HighScore", scoreValue);
-            highscore.text = scoreValue.ToString();
+            highscoreValue = scoreValue;
+            highscoreText.text = highscoreValue.ToString();
         }
     }
 }
